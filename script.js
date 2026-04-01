@@ -1,4 +1,5 @@
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "f9e849811c48b9e949fdaad9f86ecfbf";
+
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -54,13 +55,16 @@ window.onload = () => {
 function fetchTrending() {
     fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
         .then(res => res.json())
-        .then(data => showMovies(data.results));
+        .then(data => showMovies(data.results))
+        .catch(err => console.log(err));
 }
 
 function showMovies(movies) {
     container.innerHTML = "";
 
     movies.forEach(movie => {
+        if (!movie.poster_path) return;
+
         const div = document.createElement("div");
         div.classList.add("movie");
 
@@ -81,15 +85,20 @@ document.getElementById("moods").addEventListener("click", (e) => {
 
     fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`)
         .then(res => res.json())
-        .then(data => showMovies(data.results));
+        .then(data => showMovies(data.results))
+        .catch(err => console.log(err));
 });
 
 searchInput.addEventListener("keyup", () => {
-    const query = searchInput.value;
+    const query = searchInput.value.trim();
 
-    if (!query) return fetchTrending();
+    if (!query) {
+        fetchTrending();
+        return;
+    }
 
     fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
         .then(res => res.json())
-        .then(data => showMovies(data.results));
+        .then(data => showMovies(data.results))
+        .catch(err => console.log(err));
 });
