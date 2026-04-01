@@ -4,7 +4,7 @@
 
 The Movie Explorer Web App is a dynamic web application that allows users to explore movies using real-time data from the TMDB API. This application includes a unique mood-based recommendation system, where users can select their mood (such as happy, romantic, or thrilling) to discover relevant movies.
 
-Users can also search for movies, view details like posters, ratings, and release dates, and save their favorite movies using local storage.
+Users can also search for movies, view details like posters, ratings, and release dates, and save their favourite movies using local storage.
 
 ---
 
