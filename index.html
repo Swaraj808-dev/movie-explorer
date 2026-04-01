@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Login -->
+    <div id="login-screen">
+        <h1>🎬 Movie Explorer</h1>
+        <input type="text" id="username" placeholder="Enter your name">
+        <button id="login-btn">Enter</button>
+    </div>
+
+    <!-- App -->
+    <div id="app" class="hidden">
+        <header>
+            <h1>🎬 Movie Explorer</h1>
+            <input type="text" id="search" placeholder="Search movies...">
+        </header>
+
+        <!-- Mood Buttons -->
+        <div id="moods">
+            <button data-mood="happy">😄</button>
+            <button data-mood="romantic">❤️</button>
+            <button data-mood="dark">😈</button>
+            <button data-mood="scary">👻</button>
+            <button data-mood="action">🔥</button>
+            <button data-mood="chill">😌</button>
+            <button data-mood="sad">😢</button>
+            <button data-mood="sciFi">🚀</button>
+        </div>
+
+        <!-- Movies -->
+        <main id="movie-container"></main>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup hidden">
+        <p id="greeting"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
