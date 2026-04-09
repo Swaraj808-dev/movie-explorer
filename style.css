@@ -100,11 +100,10 @@ span {
 }
 
 #welcome-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 42px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: #ffffff;
+    display: inline-block;
+
+    font-size: 40px;
+    font-weight: bold;
 
     white-space: nowrap;
     overflow: hidden;
@@ -131,4 +130,57 @@ span {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+#mood-question {
+    margin-top: 20px;
+    color: #ccc;
+}
+
+#mood-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#mood-container button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 25px;
+    background: #1f1f1f;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#mood-container button:hover {
+    background: #ff416c;
+    transform: scale(1.1);
+}
+
+#mood-container button.active {
+    background: #ff416c;
+}
+
+#movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.movie {
+    width: 180px;
+    margin: 10px;
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.movie img:hover {
+    transform: scale(1.1);
 }

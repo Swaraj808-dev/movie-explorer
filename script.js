@@ -71,14 +71,96 @@ function showHome(username) {
     loginPage.classList.add("hidden");
     homePage.classList.remove("hidden");
 
+    const moodQuestion = document.getElementById("mood-question");
+    const moodContainer = document.getElementById("mood-container");
+
     const text = `Welcome back, <span>${username}</span> 🍿`;
 
-    // Reset animation
     welcomeText.style.animation = "none";
     welcomeText.offsetHeight;
 
     welcomeText.innerHTML = text;
 
-    // Reapply animation
     welcomeText.style.animation = "typing 2s steps(25, end) forwards";
+
+    moodQuestion.classList.add("hidden");
+    moodContainer.classList.add("hidden");
+
+    setTimeout(() => {
+        moodQuestion.classList.remove("hidden");
+        moodContainer.classList.remove("hidden");
+    }, 2000);
+}
+
+/* ================= API CONFIG ================= */
+const API_KEY = 'f9e849811c48b9e949fdaad9f86ecfbf';
+const BASE_URL = "https://api.themoviedb.org/3";
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
+
+
+/* ================= MOOD MAP ================= */
+
+const moodMap = {
+    happy: 35,
+    romantic: 10749,
+    action: 28,
+    horror: 27,
+    sad: 18,
+    thriller: 53,
+    chill: 16,
+    adventure: 12,
+    "sci-fi": 878,
+    family: 10751
+};
+
+
+/* ================= MOOD CLICK ================= */
+
+document.getElementById("mood-container").addEventListener("click", (e) => {
+    const mood = e.target.dataset.mood;
+    if (!mood) return;
+
+    fetchMovies(moodMap[mood]);
+
+    // highlight selected button
+    document.querySelectorAll("#mood-container button").forEach(btn => btn.classList.remove("active"));
+    e.target.classList.add("active");
+});
+
+
+/* ================= FETCH MOVIES ================= */
+
+function fetchMovies(genreId) {
+    fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`)
+        .then(res => res.json())
+        .then(data => showMovies(data.results))
+        .catch(err => console.log("Error:", err));
+}
+
+
+/* ================= SHOW MOVIES ================= */
+
+function showMovies(movies) {
+    const container = document.getElementById("movie-container");
+    container.innerHTML = "";
+
+    if (!movies || movies.length === 0) {
+        container.innerHTML = "<p>No movies found</p>";
+        return;
+    }
+
+    movies.forEach(movie => {
+        const div = document.createElement("div");
+        div.classList.add("movie");
+
+        const poster = movie.poster_path
+            ? IMG_URL + movie.poster_path
+            : "https://via.placeholder.com/300x450?text=No+Image";
+
+        div.innerHTML = `
+            <img src="${poster}">
+        `;
+
+        container.appendChild(div);
+    });
 }
