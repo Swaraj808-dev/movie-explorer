@@ -1,12 +1,10 @@
 const loginBtn = document.getElementById("login-btn");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
-
 const loginPage = document.getElementById("login-page");
 const homePage = document.getElementById("home-page");
 const welcomeText = document.getElementById("welcome-text");
-
-const toggleLink = document.querySelector("span");
+const toggleLink = document.getElementById("toggle-link");
 
 let isSignup = false;
 

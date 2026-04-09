@@ -1,12 +1,26 @@
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     height: 100vh;
-    background: #0f0f0f;
+
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+                url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+}
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(4px);
+    z-index: -1;
 }
 
 .login-card {
@@ -19,10 +33,30 @@ body {
     animation: fadeIn 0.6s ease;
 }
 
-.login-card h1 {
-    margin-bottom: 20px;
+.login-card input:focus {
+    border: 1px solid #ff416c;
+    background: #2a2a2a;
 }
 
+.login-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.login-card button {
+    box-shadow: 0 0 20px rgba(255, 65, 108, 0.4);
+}
+
+.login-card h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.login-card h1 span {
+    color: #ff416c;
+}
 .hidden {
     display: none;
 }
