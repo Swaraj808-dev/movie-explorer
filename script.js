@@ -164,3 +164,22 @@ function showMovies(movies) {
         container.appendChild(div);
     });
 }
+
+
+const searchBar = document.getElementById("search-bar");
+
+searchBar.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        const query = searchBar.value.trim();
+        if (query) {
+            searchMovies(query);
+        }
+    }
+});
+
+function searchMovies(query) {
+    fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+        .then(res => res.json())
+        .then(data => showMovies(data.results))
+        .catch(err => console.log(err));
+}

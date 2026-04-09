@@ -184,3 +184,16 @@ span {
 .movie img:hover {
     transform: scale(1.1);
 }
+
+#search-bar {
+    margin-top: 20px;
+    padding: 12px 20px;
+    width: 300px;
+    max-width: 80%;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: #1f1f1f;
+    color: white;
+    font-size: 16px;
+}
