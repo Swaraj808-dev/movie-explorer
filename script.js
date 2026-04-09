@@ -68,8 +68,8 @@ loginBtn.addEventListener("click", () => {
 
 // Show home page with welcome message
 function showHome(username) {
-    loginPage.classList.add("hidden");
-    homePage.classList.remove("hidden");
+    loginPage.style.display = "none";
+    homePage.style.display = "block";
 
     const moodQuestion = document.getElementById("mood-question");
     const moodContainer = document.getElementById("mood-container");
@@ -83,22 +83,20 @@ function showHome(username) {
 
     welcomeText.style.animation = "typing 2s steps(25, end) forwards";
 
-    moodQuestion.classList.add("hidden");
-    moodContainer.classList.add("hidden");
+    moodQuestion.style.display = "none";
+    moodContainer.style.display = "none";
+
 
     setTimeout(() => {
-        moodQuestion.classList.remove("hidden");
-        moodContainer.classList.remove("hidden");
-    }, 2000);
+        moodQuestion.style.display = "block";
+        moodContainer.style.display = "flex";
+    }, 1000);
 }
 
-/* ================= API CONFIG ================= */
 const API_KEY = 'f9e849811c48b9e949fdaad9f86ecfbf';
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-
-/* ================= MOOD MAP ================= */
 
 const moodMap = {
     happy: 35,
@@ -113,22 +111,16 @@ const moodMap = {
     family: 10751
 };
 
-
-/* ================= MOOD CLICK ================= */
-
 document.getElementById("mood-container").addEventListener("click", (e) => {
     const mood = e.target.dataset.mood;
     if (!mood) return;
 
     fetchMovies(moodMap[mood]);
 
-    // highlight selected button
     document.querySelectorAll("#mood-container button").forEach(btn => btn.classList.remove("active"));
     e.target.classList.add("active");
 });
 
-
-/* ================= FETCH MOVIES ================= */
 
 function fetchMovies(genreId) {
     fetch(`${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreId}`)
@@ -136,9 +128,6 @@ function fetchMovies(genreId) {
         .then(data => showMovies(data.results))
         .catch(err => console.log("Error:", err));
 }
-
-
-/* ================= SHOW MOVIES ================= */
 
 function showMovies(movies) {
     const container = document.getElementById("movie-container");
@@ -165,21 +154,30 @@ function showMovies(movies) {
     });
 }
 
-
 const searchBar = document.getElementById("search-bar");
 
-searchBar.addEventListener("keypress", function(e) {
+searchBar.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
         const query = searchBar.value.trim();
-        if (query) {
+
+        console.log("Searching:", query);
+
+        if (query !== "") {
             searchMovies(query);
         }
     }
 });
 
 function searchMovies(query) {
-    fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`)
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
+
+    console.log("URL:", url);
+
+    fetch(url)
         .then(res => res.json())
-        .then(data => showMovies(data.results))
-        .catch(err => console.log(err));
+        .then(data => {
+            console.log("Results:", data);
+            showMovies(data.results);
+        })
+        .catch(err => console.log("Error:", err));
 }
