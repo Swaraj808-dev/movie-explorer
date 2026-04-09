@@ -73,14 +73,14 @@ function showHome(username) {
     loginPage.classList.add("hidden");
     homePage.classList.remove("hidden");
 
-    const text = `Hello, ${username} 👋`;
+    const text = `Welcome back, <span>${username}</span> 🍿`;
 
     // Reset animation
     welcomeText.style.animation = "none";
-    welcomeText.offsetHeight; // trigger reflow
+    welcomeText.offsetHeight;
 
-    welcomeText.innerText = text;
+    welcomeText.innerHTML = text;
 
     // Reapply animation
-    welcomeText.style.animation = "typing 2s steps(25, end) forwards, blink 0.7s infinite";
+    welcomeText.style.animation = "typing 2s steps(25, end) forwards";
 }

@@ -9,7 +9,6 @@ body {
     color: white;
 }
 
-/* LOGIN CARD */
 .login-card {
     background: #1c1c1c;
     padding: 40px 30px;
@@ -24,7 +23,10 @@ body {
     margin-bottom: 20px;
 }
 
-/* INPUTS */
+.hidden {
+    display: none;
+}
+
 .login-card input {
     width: 100%;
     padding: 14px;
@@ -36,7 +38,6 @@ body {
     outline: none;
 }
 
-/* BUTTON */
 .login-card button {
     width: 100%;
     padding: 12px;
@@ -54,29 +55,34 @@ body {
     transform: scale(1.05);
 }
 
-/* LINK */
 span {
     color: #ff416c;
     cursor: pointer;
     font-weight: bold;
 }
 
-/* HOME */
 #home-page {
     text-align: center;
 }
 
-/* TYPEWRITER */
 #welcome-text {
-    font-size: 32px;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #ffffff;
+
     white-space: nowrap;
     overflow: hidden;
     width: 0;
+
     animation: typing 2s steps(25, end) forwards;
 }
 
-/* ANIMATIONS */
+#welcome-text span {
+    color: #ff416c;
+}
+
 @keyframes typing {
     from { width: 0 }
     to { width: 100% }
