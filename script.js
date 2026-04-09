@@ -8,7 +8,6 @@ const toggleLink = document.getElementById("toggle-link");
 
 let isSignup = false;
 
-//SignIN/SignUP Toggle
 toggleLink.addEventListener("click", () => {
     isSignup = !isSignup;
 
@@ -23,7 +22,6 @@ toggleLink.addEventListener("click", () => {
     }
 });
 
-//handle Login/Signup
 loginBtn.addEventListener("click", () => {
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
@@ -133,22 +131,17 @@ function showMovies(movies) {
     const container = document.getElementById("movie-container");
     container.innerHTML = "";
 
-    if (!movies || movies.length === 0) {
-        container.innerHTML = "<p>No movies found</p>";
-        return;
-    }
-
     movies.forEach(movie => {
+        if (!movie.poster_path) return;
+
         const div = document.createElement("div");
         div.classList.add("movie");
 
-        const poster = movie.poster_path
-            ? IMG_URL + movie.poster_path
-            : "https://via.placeholder.com/300x450?text=No+Image";
-
         div.innerHTML = `
-            <img src="${poster}">
+            <img src="${IMG_URL + movie.poster_path}">
         `;
+
+        div.addEventListener("click", () => openPopup(movie));
 
         container.appendChild(div);
     });
@@ -181,3 +174,32 @@ function searchMovies(query) {
         })
         .catch(err => console.log("Error:", err));
 }
+
+
+const popup = document.getElementById("movie-popup");
+const popupImg = document.getElementById("popup-img");
+const popupTitle = document.getElementById("popup-title");
+const popupRating = document.getElementById("popup-rating");
+const popupDate = document.getElementById("popup-date");
+const popupOverview = document.getElementById("popup-overview");
+const closePopup = document.getElementById("close-popup");
+
+function openPopup(movie) {
+    popup.classList.remove("hidden");
+
+    popupImg.src = IMG_URL + movie.poster_path;
+    popupTitle.innerText = movie.title;
+    popupRating.innerText = "⭐ " + movie.vote_average;
+    popupDate.innerText = "📅 " + movie.release_date;
+    popupOverview.innerText = movie.overview;
+}
+
+closePopup.addEventListener("click", () => {
+    popup.classList.add("hidden");
+
+popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+        popup.classList.add("hidden");
+    }
+});
+});
