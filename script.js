@@ -131,9 +131,11 @@ function showMovies(movies) {
     const container = document.getElementById("movie-container");
     container.innerHTML = "";
 
-    movies.forEach(movie => {
-        if (!movie.poster_path) return;
+    movies = movies.filter(movie => movie.poster_path);
 
+    movies = movies.sort((a, b) => b.vote_average - a.vote_average);
+
+    movies.forEach(movie => {
         const div = document.createElement("div");
         div.classList.add("movie");
 
